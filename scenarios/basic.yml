@@ -1,0 +1,20 @@
+name: basic-room
+seed: 42
+
+agents:
+  - id: alice
+    behavior: mentioned
+
+  - id: bob
+    behavior: mentioned
+
+  - id: charlie
+    behavior: mentioned
+
+room:
+  id: main
+
+scheduler:
+  type: highest_urgency
+
+steps: 10

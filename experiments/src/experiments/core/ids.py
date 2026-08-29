@@ -1,25 +1,25 @@
 from __future__ import annotations
 
 from typing import NewType
-from uuid import UUID, uuid4
+from uuid import uuid4
 
-AgentId = NewType("AgentId", UUID)
-RoomId = NewType("RoomId", UUID)
-EventId = NewType("EventId", UUID)
-RunId = NewType("RunId", UUID)
+AgentId = NewType("AgentId", str)
+RoomId = NewType("RoomId", str)
+EventId = NewType("EventId", str)
+RunId = NewType("RunId", str)
 
 
 def new_agent_id() -> AgentId:
-    return AgentId(uuid4())
+    return AgentId(str(uuid4()))
 
 
 def new_room_id() -> RoomId:
-    return RoomId(uuid4())
+    return RoomId(str(uuid4()))
 
 
 def new_event_id() -> EventId:
-    return EventId(uuid4())
+    return EventId(str(uuid4()))
 
 
 def new_run_id() -> RunId:
-    return RunId(uuid4())
+    return RunId(str(uuid4()))

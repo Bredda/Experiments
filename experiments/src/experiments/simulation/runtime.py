@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from dataclasses import dataclass, field
+from pathlib import Path
 
 from experiments.agents.agent import Agent
 from experiments.core.actions import Speak
@@ -47,7 +48,9 @@ class Simulation:
                 )
             )
 
-    def export_events(self, path: str) -> None:
+
+
+    def export_events(self, path: Path) -> None:
         self.events.write_jsonl(path)
 
     def step(self) -> AnyEvent | None:

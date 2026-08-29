@@ -1,0 +1,34 @@
+[project]
+name = "api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Bredda", email = "mangin.laurent@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "experiments",
+    "fastapi[standard]>=0.141.1",
+    "pydantic-settings>=2.15.0",
+    "scalar-fastapi>=1.9.0",
+    "uvicorn[standard]>=0.52.4",
+]
+
+[tool.uv.sources]
+experiments = { path = "../experiments" }
+
+[project.scripts]
+api = "api:main"
+
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.5",
+]
+
+
+[build-system]
+requires = ["uv_build>=0.12.7,<0.13.0"]
+build-backend = "uv_build"
