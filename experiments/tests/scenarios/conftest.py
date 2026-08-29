@@ -1,10 +1,16 @@
 
-from experiments.agents import MentionedAgent, Agent
-from experiments.rooms.room import Room
-from experiments.core.ids import AgentId, RoomId
 import pytest
 
-from experiments.scenarios.config import AgentConfig, RoomConfig, ScenarioConfig, SchedulerConfig
+from experiments.agents import Agent, MentionedAgent
+from experiments.core.ids import AgentId, RoomId
+from experiments.rooms.room import Room
+from experiments.scenarios.config import (
+    AgentConfig,
+    RoomConfig,
+    ScenarioConfig,
+    SchedulerConfig,
+)
+
 
 def make_agent(name: str, room_id = "1") -> Agent:
     return MentionedAgent(AgentId(name), name, RoomId(room_id))

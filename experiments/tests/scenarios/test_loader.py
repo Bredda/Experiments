@@ -1,5 +1,6 @@
 from experiments.scenarios import load_scenario
 
+
 def test_load_basic_scenario():
     # Todo: mock fs
     scenario = load_scenario("scenarios/basic.yml")

@@ -8,13 +8,16 @@ help:  ## Display this help
 uv:  ## Install uv if it's not present.
 	@command -v uv >/dev/null 2>&1 || curl -LsSf https://astral.sh/uv/install.sh | sh
 	
-.PHONY: dev
-dev: uv ## Install dev dependencies
-	uv sync --directory experiments
+.PHONY: install
 
+install: uv ## Install dev dependencies
+	uv sync --directory experiments
+	uv sync --directory api
 .PHONY: lint
+
 lint:  ## Run linters
 	uv run --directory experiments ruff check
+	uv run --directory api ruff check
 
 .PHONY: run
 run: 

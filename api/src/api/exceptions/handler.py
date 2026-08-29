@@ -5,7 +5,7 @@ These handlers convert domain exceptions to proper HTTP responses.
 
 import logging
 
-from fastapi import FastAPI, Request, WebSocket
+from fastapi import Request, WebSocket
 from fastapi.responses import JSONResponse
 
 from .app_exception import AppException

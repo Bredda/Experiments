@@ -6,6 +6,7 @@ from scalar_fastapi import AgentScalarConfig, add_scalar_reference
 
 from .routers import api_router
 
+
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
 

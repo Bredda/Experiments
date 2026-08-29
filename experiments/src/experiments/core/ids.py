@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import NewType
-from uuid import UUID, uuid4
+from uuid import uuid4
 
 AgentId = NewType("AgentId", str)
 RoomId = NewType("RoomId", str)

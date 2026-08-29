@@ -5,7 +5,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 from experiments.agents import Agent
-from experiments.core.ids import AgentId, RoomId, new_run_id
+from experiments.core.ids import RoomId, new_run_id
 from experiments.core.types import RunConfig
 from experiments.rooms.room import Room
 from experiments.scheduler import HighestUrgencyScheduler
@@ -13,7 +13,6 @@ from experiments.simulation.runtime import Simulation
 
 from .config import ScenarioConfig
 from .factory import build_agent
-
 
 SCHEDULERS = {
     "highest_urgency": HighestUrgencyScheduler,

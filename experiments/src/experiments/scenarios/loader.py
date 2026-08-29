@@ -19,7 +19,7 @@ def load_scenario(path: str | Path) -> ScenarioConfig:
         data = yaml.safe_load(file)
 
     if not isinstance(data, dict):
-        raise ValueError("Scenario root must be a mapping")
+        raise TypeError("Scenario root must be a mapping")
 
     agents = [
         AgentConfig(

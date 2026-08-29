@@ -1,5 +1,7 @@
 import json
+
 from experiments.scenarios import load_scenario, run_scenario
+
 
 def test_scenario_run_creates_artifacts(tmp_path):
     scenario = load_scenario("scenarios/basic.yml")

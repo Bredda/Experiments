@@ -3,7 +3,6 @@ from __future__ import annotations
 from experiments.agents.agent import Agent, MentionedAgent
 from experiments.core.ids import AgentId, RoomId
 
-
 AGENT_BEHAVIORS = {
     "mentioned": MentionedAgent,
 }

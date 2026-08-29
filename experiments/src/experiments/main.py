@@ -1,14 +1,15 @@
 
 
+import sys
+from pathlib import Path
+
 from experiments.agents import MentionedAgent
 from experiments.core.ids import new_agent_id, new_room_id, new_run_id
 from experiments.core.types import RunConfig
 from experiments.rooms.room import Room
+from experiments.scenarios import load_scenario, run_scenario
 from experiments.scheduler import HighestUrgencyScheduler
 from experiments.simulation.runtime import Simulation
-import sys
-from pathlib import Path
-from experiments.scenarios import load_scenario, run_scenario
 
 room = Room(
     id=new_room_id(),

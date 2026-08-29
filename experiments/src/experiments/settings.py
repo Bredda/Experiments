@@ -1,9 +1,7 @@
 """Application configuration using Pydantic BaseSettings."""
 
 from pathlib import Path
-from typing import Literal
 
-from pydantic import computed_field, field_validator, ValidationInfo
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
