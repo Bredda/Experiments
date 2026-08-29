@@ -1,9 +1,13 @@
 
 
+import sys
+from pathlib import Path
+
 from experiments.agents import MentionedAgent
 from experiments.core.ids import new_agent_id, new_room_id, new_run_id
 from experiments.core.types import RunConfig
 from experiments.rooms.room import Room
+from experiments.scenarios import load_scenario, run_scenario
 from experiments.scheduler import HighestUrgencyScheduler
 from experiments.simulation.runtime import Simulation
 
@@ -31,10 +35,20 @@ simulation = Simulation(
 simulation.setup()
 
 
+
 def run() -> int:
-    for _ in range(10):
-        event = simulation.step()
-        print(event)
-    simulation.export_events("runs/basic/run.jsonl")    
+    if len(sys.argv) != 3 or sys.argv[1] != "run":
+        print("Usage: experiments run <scenario.yaml>")
+        return 1
+    cwd = Path.cwd()
+    root = cwd.parent
+    print(root.absolute())
+    scenario_path = Path(root, sys.argv[2])
+    output_path = Path(root, "runs")
+    scenario = load_scenario(scenario_path)
+    output_dir = run_scenario(scenario, output_path)
+
+    print(f"Run written to {output_dir}")
+
     return 0
 

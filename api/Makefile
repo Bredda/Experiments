@@ -9,20 +9,17 @@ uv:  ## Install uv if it's not present.
 	@command -v uv >/dev/null 2>&1 || curl -LsSf https://astral.sh/uv/install.sh | sh
 	
 .PHONY: install
-
 install: uv ## Install dev dependencies
-	uv sync --directory experiments
-	uv sync --directory api
-.PHONY: lint
+	uv sync
 
+.PHONY: lint
 lint:  ## Run linters
-	uv run --directory experiments ruff check
-	uv run --directory api ruff check
+	uv run ruff check
 
 .PHONY: run
-run: 
-	uv run --directory experiments experiments run scenarios/basic.yml
+dev: 
+	uv run uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
 
 .PHONY: test
 test: 
-	uv run --directory experiments pytest 
+	uv run pytest 
