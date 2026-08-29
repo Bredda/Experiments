@@ -5,8 +5,6 @@
 
 import json
 import os
-from os import listdir
-from os.path import isfile, join
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
@@ -37,32 +35,34 @@ def _read_json(path: Path):
             data: dict = json.loads(file.read())
             return data
 
-def _list_folders(path: Path):
-    return [f for f in listdir(path) if not isfile(join(path, f))]
-
+def list_runs():
+    config_files =  _TARGET_DIR.glob("*/config.json")
+    configs = [_read_json(f) for f in config_files]
+    return configs
 
 @router.get("")
 async def get_runs() :
-    runs = _list_folders(_TARGET_DIR)
-    return {"runs": runs}
+    return {"data": list_runs()}
 
 @router.get("/{run_id}")
 async def get_run(run_id: str):
     run_path = _TARGET_DIR / run_id
-    if run_path.exists:
+    print(run_path)
+    if not run_path.exists:
         raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
 
     config = _read_json(_TARGET_DIR / run_id / "config.json")
-    return {**config}
+    return {"data": config}
     
 
 @router.get("/{run_id}/events")
 async def get_run_events(run_id: str):
     run_path = _TARGET_DIR / run_id
-    if run_path.exists:
+    print(run_path)
+    if not run_path.exists:
         raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
 
     events = _read_jsonl(_TARGET_DIR / run_id /"events.jsonl")
-    return {"run_id": run_id, "events": events}
+    return {"data": events}
 
          
