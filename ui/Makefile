@@ -8,12 +8,12 @@ help:  ## Display available API commands
 
 .PHONY: install
 install:  ## Install dependencies
-	uv sync
+	pnpm install
 
 .PHONY: lint
 lint:  ## Run linters
-	uv run ruff check
+	pnpm lint
 
 .PHONY: dev
 dev:  ## Start the development server
-	uv run uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
+	pnpm dev
