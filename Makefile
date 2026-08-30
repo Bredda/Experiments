@@ -35,3 +35,8 @@ dev:  ## Start API development server
 	@$(MAKE) -C api dev & \
 	$(MAKE) -C ui dev & \
 	wait
+
+
+.PHONY: sync-types
+sync-types:
+	@$(MAKE) -C ui sync-types

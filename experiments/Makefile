@@ -20,4 +20,4 @@ test:  ## Run tests
 
 .PHONY: run
 run:  ## Run the basic scenario
-	uv run experiments run ../scenarios/basic.yml
+	uv run experiments run ./scenarios/basic.yml

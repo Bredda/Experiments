@@ -11,6 +11,7 @@ import { getRuns } from "@/lib/api";
 import { ArrowRight } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
+import React from "react";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -23,7 +24,7 @@ export default async function Home() {
         <div className="p-3 max-w-md mx-auto">
           <ScrollArea className="h-full">
             {runs.map((r) => (
-              <>
+              <React.Fragment key={r.run_id}>
                 <Item
                   key={r.run_id}
                   render={
@@ -41,7 +42,7 @@ export default async function Home() {
                   }
                 />
                 <ItemSeparator />
-              </>
+              </React.Fragment>
             ))}
           </ScrollArea>
         </div>

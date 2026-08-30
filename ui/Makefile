@@ -17,3 +17,8 @@ lint:  ## Run linters
 .PHONY: dev
 dev:  ## Start the development server
 	pnpm dev
+
+.PHONY: sync-types
+sync-types:
+	pnpm dlx openapi-typescript http://localhost:8000/openapi.json \
+	-o lib/api-types.ts
