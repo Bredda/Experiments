@@ -7,7 +7,11 @@ import json
 import os
 from pathlib import Path
 
+from api.models.base import ApiResponse
+from api.models.run import Run
 from fastapi import APIRouter, HTTPException
+
+from experiments.scenarios.config import ScenarioConfig
 
 _cwd = Path.cwd()
 _root = _cwd.parent
@@ -37,29 +41,31 @@ def _read_json(path: Path):
 
 def list_runs():
     config_files =  _TARGET_DIR.glob("*/config.json")
-    configs = [_read_json(f) for f in config_files]
-    return configs
+    return [_read_json(f) for f in config_files]
 
-@router.get("")
+@router.get("", response_model=ApiResponse[list[Run]])
 async def get_runs() :
+    print(list_runs())
     return {"data": list_runs()}
 
-@router.get("/{run_id}")
+@router.get("/{run_id}", response_model=ApiResponse[Run])
 async def get_run(run_id: str):
     run_path = _TARGET_DIR / run_id
-    print(run_path)
-    if not run_path.exists:
+    if not run_path.exists():
         raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
 
-    config = _read_json(_TARGET_DIR / run_id / "config.json")
-    return {"data": config}
+    config_raw = _read_json(_TARGET_DIR / run_id / "config.json")
+    run = Run.model_validate(config_raw)
+    response = ApiResponse(data=run)
+  
+    return response
     
 
 @router.get("/{run_id}/events")
 async def get_run_events(run_id: str):
     run_path = _TARGET_DIR / run_id
     print(run_path)
-    if not run_path.exists:
+    if not run_path.exists():
         raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
 
     events = _read_jsonl(_TARGET_DIR / run_id /"events.jsonl")

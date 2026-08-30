@@ -1,9 +1,14 @@
+
+from pathlib import Path
+
 from experiments.scenarios import load_scenario
+
 
 
 def test_load_basic_scenario():
     # Todo: mock fs
-    scenario = load_scenario("scenarios/basic.yml")
+    fixture_path = Path(__file__).parent / "fixtures" / "basic.yml"
+    scenario = load_scenario(fixture_path)
 
     assert scenario.name == "basic-room"
     assert scenario.seed == 42

@@ -1,3 +1,5 @@
+import { components } from "./api-types";
+
 export type Event = {
   id: string;
   timestamp: string;
@@ -16,17 +18,4 @@ export type Event = {
   };
 };
 
-export type Run = {
-  run_id: string;
-  scenario: {
-    name: string;
-    seed: number;
-    agents: { id: string; behavior: string }[];
-    room: {
-      id: string;
-      members: string[];
-    };
-    scheduler: { type: string };
-    steps: number;
-  };
-};
+export type Run = components["schemas"]["Run"];

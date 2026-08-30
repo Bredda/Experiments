@@ -1,10 +1,12 @@
 import json
+from pathlib import Path
 
 from experiments.scenarios import load_scenario, run_scenario
 
 
 def test_scenario_run_creates_artifacts(tmp_path):
-    scenario = load_scenario("scenarios/basic.yml")
+    fixture_path = Path(__file__).parent / "fixtures" / "basic.yml"
+    scenario = load_scenario(fixture_path)
 
     output = run_scenario(
         scenario,
@@ -27,7 +29,8 @@ def _normalize_events(content: str) -> list[dict]:
     return events
 
 def test_same_scenario_same_seed(tmp_path):
-    scenario = load_scenario("scenarios/basic.yml")
+    fixture_path = Path(__file__).parent / "fixtures" / "basic.yml"
+    scenario = load_scenario(fixture_path)
 
     first = run_scenario(
         scenario,
