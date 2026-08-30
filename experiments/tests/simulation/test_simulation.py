@@ -52,10 +52,45 @@ def test_silent_step_still_advances_time(silent_simulation: Simulation) -> None:
     after = simulation.events.to_list()
 
     assert simulation.clock.step == 1
-    assert len(after) == before + len(simulation.agents)
+    assert len(after) == before + 2*len(simulation.agents)
     assert result is not None
 
     assert all(
         event.type == "action.proposed"
         for event in after[before:]
     )
+
+def test_observation_contains_simulation_context(silent_simulation: Simulation) -> None:
+    simulation = silent_simulation
+    simulation.setup()
+
+    agent = simulation.agents[0]
+
+    observation = agent.observe(
+        step=7,
+        time=simulation.clock.now,
+        events=simulation.events.to_list(),
+    )
+
+    assert observation.agent_id == agent.id
+    assert observation.room_id == simulation.room.id
+    assert observation.step == 7
+    assert observation.time == simulation.clock.now
+    assert len(observation.events) == len(simulation.events)
+
+
+def test_agent_proposes_action(silent_simulation: Simulation) -> None:
+    simulation = silent_simulation
+    simulation.setup()
+
+    agent = simulation.agents[0]
+
+    observation = agent.observe(
+        step=1,
+        time=simulation.clock.now,
+        events=simulation.events.to_list(),
+    )
+
+    proposal = agent.propose(observation)
+
+    assert proposal.action is not None

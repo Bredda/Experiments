@@ -16,9 +16,9 @@ install: uv  ## Install all project dependencies
 
 .PHONY: lint
 lint:  ## Run all linters
-	$(MAKE) -C experiments lint
-	$(MAKE) -C api lint
-	$(MAKE) -C ui lint
+	$(MAKE) -C experiments lint ARGS="$(ARGS)"
+	$(MAKE) -C api lint ARGS="$(ARGS)"
+	$(MAKE) -C ui lint ARGS="$(ARGS)"
 
 .PHONY: test
 test:  ## Run all tests

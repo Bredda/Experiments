@@ -34,7 +34,7 @@ class ScenarioConfig(BaseModel):
     steps: int = Field(default=10, ge=0)
 
     @model_validator(mode="after")
-    def validate_memberships(self) -> "ScenarioConfig":
+    def validate_memberships(self) -> ScenarioConfig:
         agent_ids = {agent.id for agent in self.agents}
 
         for room in self.rooms:

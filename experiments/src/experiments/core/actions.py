@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Literal
 
 from experiments.core.ids import AgentId, RoomId
 
@@ -18,11 +19,13 @@ class Speak:
     """
 
     agent_id: AgentId
+
     room_id: RoomId
     content: str
     urgency: float = 0.5
     relevance: float = 0.5
     social_cost: float = 0.0
+    type: Literal["speak"] = "speak"
     @property
     def score(self) -> float:
         return (
@@ -40,6 +43,11 @@ class StaySilent:
         agent_id: The ID of the agent staying silent
     """
     agent_id: AgentId
-
+    type: Literal["stay_silent"] = "stay_silent"
 
 Action = Speak | StaySilent
+
+@dataclass(frozen=True)
+class ActionProposal:
+    action: Action
+    confidence: float = 1.0

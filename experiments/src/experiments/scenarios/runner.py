@@ -1,12 +1,10 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict
 from pathlib import Path
+
 from .config import ScenarioConfig
 from .factory import build_run
-
-
 
 
 def run_scenario(

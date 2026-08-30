@@ -12,7 +12,7 @@ install:  ## Install dependencies
 
 .PHONY: lint
 lint:  ## Run linter
-	uv run ruff check
+	uv run ruff check $(ARGS)
 
 .PHONY: test
 test:  ## Run tests

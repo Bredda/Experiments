@@ -4,7 +4,6 @@ from pathlib import Path
 from experiments.scenarios import load_scenario
 
 
-
 def test_load_basic_scenario():
     # Todo: mock fs
     fixture_path = Path(__file__).parent / "fixtures" / "basic.yml"

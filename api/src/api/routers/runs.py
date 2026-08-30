@@ -7,11 +7,10 @@ import json
 import os
 from pathlib import Path
 
-from api.models.base import ApiResponse
-from api.models.run import Run
 from fastapi import APIRouter, HTTPException
 
-from experiments.scenarios.config import ScenarioConfig
+from api.models.base import ApiResponse
+from api.models.run import Run
 
 _cwd = Path.cwd()
 _root = _cwd.parent

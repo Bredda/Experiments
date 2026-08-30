@@ -1,18 +1,13 @@
 from __future__ import annotations
 
-from experiments.agents.agent import Agent, MentionedAgent
+from experiments.agents import Agent, MentionedAgent
 from experiments.core.ids import AgentId, RoomId, new_run_id
-
-from experiments.scheduler.highest_urgency import HighestUrgencyScheduler
-
-from .config import ScenarioConfig
-
+from experiments.core.types import RunConfig
 from experiments.rooms.room import Room
-
+from experiments.scheduler.highest_urgency import HighestUrgencyScheduler
 from experiments.simulation.runtime import Simulation
 
-from experiments.core.types import RunConfig
-
+from .config import ScenarioConfig
 
 AGENT_BEHAVIORS: dict[str, type[Agent]] = {
     "mentioned": MentionedAgent,

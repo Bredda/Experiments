@@ -12,7 +12,7 @@ install:  ## Install dependencies
 
 .PHONY: lint
 lint:  ## Run linters
-	uv run ruff check
+	uv run ruff check $(ARGS)
 
 .PHONY: dev
 dev:  ## Start the development server

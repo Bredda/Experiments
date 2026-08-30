@@ -60,12 +60,12 @@ class Simulation:
         Each agent observes the current state of the simulation and proposes an action.
         The scheduler selects one of the proposed actions, which is then executed.  
 
-        # 1. Agents observe and propose
-        # 2. Record proposals
-        # 3. Scheduler may select an executable action
-        # 4. Execute selected action, if any
-        # 5. Advance simulation time
-        # 6. Return the last meaningful event
+        1. Agents observe and propose
+        2. Record proposals
+        3. Scheduler may select an executable action
+        4. Execute selected action, if any
+        5. Advance simulation time
+        6. Return the last meaningful event
         
         Returns:
             The event corresponding to the executed action.
@@ -75,25 +75,31 @@ class Simulation:
         last_event: AnyEvent | None = None
 
         for agent in self.agents:
-            observation = agent.observe(self.events.to_list())
-            action = agent.propose(observation)
+            observation = agent.observe(
+                step=self.clock.step,
+                time=self.clock.now,
+                events=self.events.to_list(),
+            )
+
+            proposal = agent.propose(observation)
 
             event = ActionProposed(
                 id=new_event_id(),
                 timestamp=self.clock.now,
                 step=self.clock.step,
                 agent_id=agent.id,
-                action=action,
+                action=proposal.action,
             )
+            self.append(event)
 
             self.events.append(event)
             last_event = event
 
-            if isinstance(action, Speak):
+            if isinstance(proposal.action, Speak):
                 candidates.append(
                     Candidate(
                         agent_id=agent.id,
-                        action=action,
+                        action=proposal.action,
                     )
                 )
 
