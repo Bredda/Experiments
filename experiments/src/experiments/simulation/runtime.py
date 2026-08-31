@@ -75,10 +75,15 @@ class Simulation:
         last_event: AnyEvent | None = None
 
         for agent in self.agents:
+            room_view = self.room.view(
+                agent.id,
+                self.events.to_list(),
+            )
+
             observation = agent.observe(
                 step=self.clock.step,
                 time=self.clock.now,
-                events=self.events.to_list(),
+                room=room_view,
             )
 
             proposal = agent.propose(observation)
@@ -90,9 +95,8 @@ class Simulation:
                 agent_id=agent.id,
                 action=proposal.action,
             )
+            
             self.append(event)
-
-            self.events.append(event)
             last_event = event
 
             if isinstance(proposal.action, Speak):

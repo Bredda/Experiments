@@ -13,7 +13,7 @@ class MentionedAgent(Agent):
     ) -> ActionProposal:
         messages = [
             event
-            for event in observation.events
+            for event in observation.room.visible_events
             if isinstance(event, MessagePublished)
         ]
 

@@ -8,15 +8,14 @@ from datetime import datetime
 from experiments.core.actions import ActionProposal
 from experiments.core.events import AnyEvent
 from experiments.core.ids import AgentId, RoomId
-
+from experiments.rooms.room import RoomView
 
 @dataclass(frozen=True)
 class Observation:
     agent_id: AgentId
-    room_id: RoomId
+    room: RoomView
     step: int
     time: datetime
-    events: Sequence[AnyEvent]
 
 
 class Agent(ABC):
@@ -35,14 +34,13 @@ class Agent(ABC):
         *,
         step: int,
         time: datetime,
-        events: Sequence[AnyEvent],
+        room: RoomView,
     ) -> Observation:
         return Observation(
             agent_id=self.id,
-            room_id=self.room_id,
+            room=room,
             step=step,
             time=time,
-            events=events,
         )
 
     @abstractmethod
